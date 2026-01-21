@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/kugi8412/SnakeAnalysisPhylogenomicsPipeline/blob/main/SAPP_logo.png?raw=true" alt="SAAP Logo" width="600"/>
+  <img src="https://github.com/kugi8412/SnakeAnalysisPhylogenomicsPipeline/blob/main/SAPP_logo.png?raw=true" alt="SAAP Logo" width="700"/>
 </div>
 
 ## Summary
@@ -15,12 +15,16 @@
 
 It integrates state-of-the-art tools to process raw protein sequences into high-quality phylogenetic trees using **Consensus** or **Supertree** approaches. The pipeline is optimized for deep phylogenetic relationships (e.g., Bacteria/Archaea) by utilizing Maximum Likelihood methods with protein-specific substitution models via **IQ-TREE**.
 
-<div align="center">
-  <figure>
-    <img src= alt="Example" width="400"/>
-    <figcaption style="text-align:center;"><em>Example output: Reference taxonomy vs. Supertree inference.</em></figcaption>
-  </figure>
-</div>
+<p align="center">
+  <em>Example output: Reference taxonomy vs. Supertree inference.</em>
+</p>
+
+<p align="center">
+  <img src="https://github.com/kugi8412/SnakeAnalysisPhylogenomicsPipeline/blob/main/Example.png?raw=true"
+       alt="Example"
+       width="700">
+</p>
+
 
 ## Workflow Overview
 
