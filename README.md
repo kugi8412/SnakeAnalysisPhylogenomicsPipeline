@@ -64,7 +64,7 @@ conda activate sapp
 ```
 
 ### 4. Define config and samples
-You can change snakefile to choose your own files.
+You can change snakefile to choose your own files in _config_ folder.
 Config contains parameters and methods used in phylogenetics, while samples contain species to be processed.
 
 ### 5. Run & Enjoy
