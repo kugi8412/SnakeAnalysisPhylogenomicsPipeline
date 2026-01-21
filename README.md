@@ -41,3 +41,16 @@ It integrates state-of-the-art tools to process raw protein sequences into high-
 git clone https://github.com/kugi8412/SnakeAnalysisPhylogenomicsPipeline.git
 cd SAPP
 ```
+
+
+sudo apt update
+sudo apt install build-essential wget
+
+git clone https://bitbucket.org/pgor17/fasturec.git
+cd fasturec
+make
+export PATH="/opt/fasturec/bin:${PATH}"
+
+conda activate sapp
+cp fasturec $CONDA_PREFIX/bin/
+chmod +x $CONDA_PREFIX/bin/fasturec
