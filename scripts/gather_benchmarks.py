@@ -4,12 +4,13 @@
 
 
 import os
-import pandas as pd
 import glob
+
+import pandas as pd
 
 
 benchmark_dir = "benchmarks"
-output_file = snakemake.output[0]
+output_file = "benchmarks/MASTER_BENCHMARK.csv" # snakemake.output[0]
 
 all_data = []
 
@@ -35,7 +36,6 @@ if all_data:
     final_df = final_df[cols]
     final_df.rename(columns={"s": "Time_Seconds", "max_rss": "Peak_Memory_MB"}, inplace=True)
     final_df.to_csv(output_file, index=False)
-    print(f"Benchmark summary saved to {output_file}")
 else:
     print("[WARNING]: No benchmark data found.")
     with open(output_file, 'w') as f:
