@@ -71,3 +71,5 @@ Config contains parameters and methods used in phylogenetics, while samples cont
 ```bash
 snakemake --cores 8 --use-conda
 ```
+
+You can use **app_visualization.R** to visualize selected tree.
