@@ -13,8 +13,6 @@ library(shinydashboard)
 
 options(shiny.maxRequestSize = 100 * 1024^2)
 
-# --- Helper Functions ---
-
 robust_clean_name <- function(x) {
   if(is.null(x)) return(x)
   x <- as.character(x)
@@ -46,7 +44,7 @@ split_information <- function(k, n) {
   return(max(0, -(log_prob / log(2))))
 }
 
-# Metric Calculation Logic
+# Metric Calculation
 calculate_spi_metrics <- function(ref_tree, comp_tree) {
   t1 <- force_clean_phylo(ref_tree)
   t2 <- force_clean_phylo(comp_tree)
@@ -96,8 +94,7 @@ calculate_spi_metrics <- function(ref_tree, comp_tree) {
   ))
 }
 
-# --- UI Definition ---
-
+# UI
 ui <- dashboardPage(
   dashboardHeader(title = "SAPP-Vizualizer"),
   dashboardSidebar(
@@ -114,7 +111,7 @@ ui <- dashboardPage(
   ),
   dashboardBody(
     tabItems(
-      # Tab 1: Setup
+      # Setup
       tabItem(tabName = "setup_tab",
               fluidRow(
                 box(title = "Metadata Preview", status = "primary", width = 12, DTOutput("meta_preview")),
@@ -123,7 +120,7 @@ ui <- dashboardPage(
               )
       ),
       
-      # Tab 2: Analysis Config
+      # Analysis Config
       tabItem(tabName = "analysis_tab",
               fluidRow(
                 box(title = "Configuration", status = "warning", solidHeader = TRUE, width = 12,
@@ -141,7 +138,7 @@ ui <- dashboardPage(
               )
       ),
       
-      # Tab 3: Visualizations
+      # Visualizations
       tabItem(tabName = "viz_tab",
               tabsetPanel(
                 tabPanel("Reference Tree", 
@@ -178,11 +175,11 @@ ui <- dashboardPage(
   )
 )
 
-# --- Server Logic ---
 
+# Server
 server <- function(input, output, session) {
   
-  # 1. Data Loading
+  # Data Loading
   meta_data <- reactive({
     req(input$meta_file)
     tryCatch({ read.csv(input$meta_file$datapath, stringsAsFactors = FALSE) }, error = function(e) NULL)
@@ -218,14 +215,12 @@ server <- function(input, output, session) {
     ggtree(raw_ref_tree(), layout="rectangular", linewidth=0.5) + geom_tiplab() + theme_tree2()
   })
   
-  # 2. Main Pipeline (Unification & Metrics)
+  # Main Pipeline
   pipeline_res <- eventReactive(input$run_unification, {
     req(raw_ref_tree(), input$comp_files, meta_data())
-    
     ref <- raw_ref_tree()
     meta <- meta_data()
     comp_files <- input$comp_files
-    
     id_col <- input$map_id_col
     tgt_col <- input$map_target_col
     do_clean <- input$clean_underscores
@@ -279,14 +274,11 @@ server <- function(input, output, session) {
         if(length(common) > 3) {
           t1 <- keep.tip(ref, common)
           t2 <- keep.tip(tr, common)
-          
           rf <- RF.dist(t1, t2)
           max_rf <- 2*(length(common)-3)
-          
           spi <- calculate_spi_metrics(ref, tr)
-          
           path_d <- path.dist(t1, t2)
-          
+
           metrics_list[[i]] <- data.frame(
             File = comp_files$name[i],
             Taxa = length(common),
@@ -309,7 +301,7 @@ server <- function(input, output, session) {
     list(ref=ref, trees=trees_list, cophylos=comps_list, metrics=final_metrics, meta=meta_clean, msg="Analysis Complete.")
   })
   
-  # 3. Dynamic UI Selectors
+  # Dynamic UI Selectors
   output$ref_color_selector <- renderUI({ req(pipeline_res()); selectInput("col_ref", "Color By:", choices=names(pipeline_res()$meta)) })
   output$detail_color_selector <- renderUI({ req(pipeline_res()); selectInput("col_det", "Color By:", choices=names(pipeline_res()$meta)) })
   output$tang_color_selector <- renderUI({ req(pipeline_res()); selectInput("col_tang", "Color Lines By:", choices=names(pipeline_res()$meta)) })
@@ -318,20 +310,16 @@ server <- function(input, output, session) {
   output$spi_tree_selector <- renderUI({ req(pipeline_res()); selectInput("sel_spi", "Comparison:", choices=names(pipeline_res()$trees)) })
   output$unification_status <- renderText({ req(pipeline_res()); pipeline_res()$msg })
   
-  # 4. Plots & Reactives
-  
-  # --- Reference Tree ---
+  # Reference Tree
   plot_ref_reactive <- reactive({
     req(pipeline_res(), input$col_ref)
     dat <- pipeline_res()
     p <- ggtree(dat$ref, layout="rectangular", linewidth=0.8)
     p$data <- dplyr::left_join(p$data, dat$meta, by="label")
     p <- p + 
-      # Size = 6 for bigger font, offset = 0.5 to move away from tree
       geom_tiplab(align=TRUE, size=6, offset=0.5) + 
       geom_tippoint(aes(color=.data[[input$col_ref]]), size=5) +
       theme_tree2() + 
-      # Expand x-axis to accommodate offset labels
       scale_x_continuous(expand=expansion(mult=0.6)) 
     return(p)
   })
@@ -340,7 +328,7 @@ server <- function(input, output, session) {
     plot_ref_reactive()
   })
   
-  # --- Tanglegram ---
+  # Tanglegram
   draw_tanglegram_fun <- function() {
     req(pipeline_res(), input$sel_tang, input$col_tang)
     dat <- pipeline_res()
@@ -356,9 +344,7 @@ server <- function(input, output, session) {
         val <- map_col[left_tips[obj$assoc[i,1]]]
         if(!is.na(val) && val %in% names(pal)) pal[val] else "grey"
       })
-      # Increased side margins to 8 to fit larger text
       par(mar=c(5,8,5,8))
-      # Increased fsize to 1.5
       plot(obj, link.type="curved", link.lwd=2, link.col=make.transparent(cols, 0.6), fsize=1.5)
       legend("bottomleft", legend=names(pal), fill=pal, title=input$col_tang, bty="n", cex=1.2)
     }
@@ -368,7 +354,7 @@ server <- function(input, output, session) {
     draw_tanglegram_fun()
   })
   
-  # --- SPI Plot ---
+  # SPI Plot
   draw_spi_fun <- function() {
     req(pipeline_res(), input$sel_spi)
     dat <- pipeline_res()
@@ -386,11 +372,9 @@ server <- function(input, output, session) {
     t2 <- force_clean_phylo(t2)
     
     tryCatch({
-      # Scale all text to 1.5x
       par(cex=1.5)
       TreeDist::VisualizeMatching(TreeDist::SharedPhylogeneticInfo, t1, t2, 
                                   matchZeros = FALSE,
-                                  prediction = 16, 
                                   setPar = TRUE)
     }, error=function(e) {
       plot.new(); text(0.5, 0.5, paste("SPI Plot Error:", e$message), col="red", cex=1.2)
@@ -401,7 +385,7 @@ server <- function(input, output, session) {
     draw_spi_fun()
   })
   
-  # --- Detailed Tree ---
+  # Detailed Tree
   plot_detail_reactive <- reactive({
     req(pipeline_res(), input$sel_det, input$col_det)
     dat <- pipeline_res()
@@ -421,7 +405,7 @@ server <- function(input, output, session) {
     plot_detail_reactive()
   })
   
-  # 5. Exports
+  # Exports
   output$meta_preview <- renderDT(meta_data(), options=list(scrollX=TRUE))
   output$metrics_table <- renderDT(pipeline_res()$metrics, options=list(scrollX=TRUE))
   output$download_txt <- downloadHandler("report.csv", function(file) write.csv(pipeline_res()$metrics, file))
