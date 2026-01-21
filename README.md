@@ -46,15 +46,28 @@ git clone https://github.com/kugi8412/SnakeAnalysisPhylogenomicsPipeline.git
 cd SAPP
 ```
 
+### 2. Install FASTUREC
 
+```bash
 sudo apt update
 sudo apt install build-essential wget
-
 git clone https://bitbucket.org/pgor17/fasturec.git
 cd fasturec
 make
 export PATH="/opt/fasturec/bin:${PATH}"
+```
 
+### 3. Create conda environment
+```bash
+conda env create -f envs/environment.yml
 conda activate sapp
-cp fasturec $CONDA_PREFIX/bin/
-chmod +x $CONDA_PREFIX/bin/fasturec
+```
+
+### 4. Define config and samples
+You can change snakefile to choose your own files.
+Config contains parameters and methods used in phylogenetics, while samples contain species to be processed.
+
+### 5. Run & Enjoy
+```bash
+snakemake --cores 8 --use-conda
+```
