@@ -43,7 +43,7 @@ It integrates state-of-the-art tools to process raw protein sequences into high-
 
 ```bash
 git clone https://github.com/kugi8412/SnakeAnalysisPhylogenomicsPipeline.git
-cd SAPP
+cd SnakeAnalysisPhylogenomicsPipeline
 ```
 
 ### 2. Install FASTUREC
