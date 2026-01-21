@@ -1,0 +1,52 @@
+# Configuration file for SAAP pipeline
+samples_file: "config/samples.csv"
+workflow_mode: "supertree"
+supertree_method: "fasturec"
+
+experiments:
+  include_paralogs: True
+  filter_bootstraps: True
+  min_tree_support: 0.5
+
+# Clustering parameters
+clustering:
+  min_seq_id: 0.25
+  coverage: 0.6
+  min_species: 8
+  outgroups: ["G01", "G30"]
+
+# Alignment parameters
+alignment:
+  mafft_args: "--auto --quiet"
+  trimal_method: "-automated1"
+
+# Consensus parameters
+consensus:
+  minsup: 0.5
+  threads: 4
+
+# Genes tree parameters
+gene_tree_params:
+  ML:
+    flags: "-m JTT+G4 -bb 1000 -nt AUTO"
+  
+  NJ:
+    flags: "-fastest -quiet"
+
+# Supertree parameters for "supermatrix"
+tree:
+  bootstrap: 100
+  gene_tree_method: "ML"
+  model: "LG+G"
+
+tree_methods: ["ML"]
+
+# Multithreading resources
+resources:
+  download: 1
+  clustering: 4
+  orthologs: 4
+  mafft: 1
+  trimal: 1
+  genetree: 1
+  supertree: 4

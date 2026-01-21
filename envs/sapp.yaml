@@ -1,0 +1,19 @@
+name: sapp
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.11
+  - snakemake
+  - pandas
+  - biopython
+  - ncbi-datasets-cli
+  - mmseqs2
+  - mafft
+  - trimal
+  - iqtree      # ML
+  - quicktree   # NJ
+  - fasttree    # NJ/ML substitute
+  - raxml-ng    # MP
+  - pip
