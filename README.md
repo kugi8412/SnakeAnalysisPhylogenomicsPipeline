@@ -31,7 +31,7 @@ It integrates state-of-the-art tools to process raw protein sequences into high-
 1.  **Data Acquisition:** Fetching proteomes from NCBI Datasets.
 2.  **Clustering:** Ortholog detection using **MMseqs2**.
 3.  **Alignment:** Accurate MSA using **MAFFT** (`--l-ins-i` for accuracy).
-4.  **Trimming:** Removing spurious regions with **Trimal**.
+4.  **Trimming:** Removing spurious regions with **trimAI**.
 5.  **Gene Trees:** Constructing individual gene trees using **IQ-TREE** (Maximum Likelihood) with automatic model selection (ModelFinder).
 6.  **Species Tree:**
     * **Consensus:** Using **IQ-TREE** (Majority Rule / Extended Consensus).
