@@ -55,6 +55,11 @@ git clone https://bitbucket.org/pgor17/fasturec.git
 cd fasturec
 make
 export PATH="/opt/fasturec/bin:${PATH}"
+sudo cp fasturec/fasturec /usr/local/bin/
+sudo chmod +x /usr/local/bin/fasturec
+
+# Check output if it is not NONE
+which fasturec
 ```
 
 ### 3. Create conda environment
