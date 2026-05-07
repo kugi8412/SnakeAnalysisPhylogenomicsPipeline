@@ -1,0 +1,16 @@
+id,species,strain,accession,bioproject,type,source
+T01,Trichoderma_atroviride,P1,GCF_020647795.1,,Trichoderma,Ingroup
+T02,Trichoderma_reesei,QM6a,GCF_000167675.1,,Trichoderma,Ingroup
+T03,Trichoderma_harzianum,CBS_226.95,GCF_003025095.1,,Trichoderma,Ingroup
+T04,Trichoderma_virens,Gv29-8,GCF_000170995.1,,Trichoderma,Ingroup
+T05,Trichoderma_asperellum,FT101,GCF_020647865.1,,Trichoderma,Ingroup
+T06,Trichoderma_citrinoviride,TUCIM_6016,GCA_002894145.1,,Trichoderma,Ingroup
+T07,Trichoderma_gamsii,T6085,GCA_001481775.1,,Trichoderma,Ingroup
+T08,Trichoderma_longibrachiatum,ATCC_18648,GCA_003025105.1,,Trichoderma,Ingroup
+T09,Trichoderma_breve,T069,GCF_028502605.1,,Trichoderma,Ingroup
+T10,Trichoderma_aggressivum,CBS_100526,GCF_033847375.1,,Trichoderma,Ingroup
+O01,Neurospora_crassa,OR74A,GCF_000182925.2,,Outgroup,Sordariomycetes
+O02,Fusarium_graminearum,PH-1,GCF_000240135.3,,Outgroup,Sordariomycetes
+O03,Aspergillus_nidulans,FGSC_A4,GCF_000011425.1,,Outgroup,Eurotiomycetes
+O04,Aspergillus_fumigatus,Af293,GCF_000002655.1,,Outgroup,Eurotiomycetes
+O05,Aspergillus_niger,CBS_513.88,GCF_000002855.4,,Outgroup,Eurotiomycetes
