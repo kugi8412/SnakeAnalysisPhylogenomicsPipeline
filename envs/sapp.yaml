@@ -2,13 +2,15 @@ name: sapp
 channels:
   - conda-forge
   - bioconda
-  - defaults
 dependencies:
   - python=3.11
   - snakemake
   - pandas
+  - numpy
+  - scipy
   - biopython
   - ncbi-datasets-cli
+  - unzip
   - mmseqs2
   - mafft
   - trimal
@@ -17,3 +19,6 @@ dependencies:
   - fasttree    # NJ/ML substitute
   - raxml-ng    # MP
   - pip
+  # NOTE: fasturec must be installed manually from source (see README)
+  - pip:
+    - requests
