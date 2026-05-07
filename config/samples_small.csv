@@ -1,0 +1,6 @@
+id,species,strain,accession,bioproject,type,source
+G01,Methanobrevibacter_smithii,OF4,GCF_000016525.1,PRJNA224116,Outgroup,Control
+G02,Bacteroides_thetaiotaomicron,VPI_5482,GCF_000011065.1,PRJNA224116,Bacteroidetes,SLE
+G20,Faecalibacterium_prausnitzii,M21/2,GCF_000154385.1,PRJNA18203,Firmicutes,Commensal
+G25,Escherichia_coli,K-12_substr.MG1655,GCF_000005845.2,PRJNA225,Proteobacteria,RA
+G30,Thermotoga_maritima,JGI,GCF_000230655.2,PRJNA63051,Outgroup,Control

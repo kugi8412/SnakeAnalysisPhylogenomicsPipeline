@@ -28,7 +28,7 @@ consensus:
 # Genes tree parameters
 gene_tree_params:
   ML:
-    flags: "-m JTT+G4 -bb 1000 -nt AUTO"
+    flags: "-m JTT+G4 -bb 1000"
   
   NJ:
     flags: "-fastest -quiet"
@@ -45,8 +45,23 @@ tree_methods: ["ML"]
 resources:
   download: 1
   clustering: 4
+  clustering_mem_mb: 4000
   orthologs: 4
+  orthologs_mem_mb: 8000
   mafft: 1
   trimal: 1
   genetree: 1
   supertree: 4
+
+# Hyperbolic embedding parameters
+embeddings:
+  dim: 64
+  epochs: 500
+  n_perturbations: 5
+  noise_scale: 0.05
+
+# Protein structure phylogeny (ESMFold)
+structure:
+  max_length: 400
+  tree_method: "nj"
+  criterion: "tm_score"

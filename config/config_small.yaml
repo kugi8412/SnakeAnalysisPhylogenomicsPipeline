@@ -1,0 +1,44 @@
+samples_file: "config/samples_small.csv"
+workflow_mode: "supertree"
+supertree_method: "fasturec"
+
+experiments:
+  include_paralogs: False
+  filter_bootstraps: False
+  min_tree_support: 0.3
+
+clustering:
+  min_seq_id: 0.25
+  coverage: 0.6
+  min_species: 3
+  outgroups: ["G01", "G30"]
+
+alignment:
+  mafft_args: "--auto --quiet"
+  trimal_method: "-automated1"
+
+consensus:
+  minsup: 0.5
+  threads: 2
+
+gene_tree_params:
+  ML:
+    flags: "-m JTT+G4 -bb 1000"
+  NJ:
+    flags: "-fastest -quiet"
+
+tree:
+  bootstrap: 50
+  gene_tree_method: "ML"
+  model: "LG+G"
+
+tree_methods: ["ML", "NJ"]
+
+resources:
+  download: 1
+  clustering: 2
+  orthologs: 2
+  mafft: 1
+  trimal: 1
+  genetree: 1
+  supertree: 2
