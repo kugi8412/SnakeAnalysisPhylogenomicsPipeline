@@ -1,3 +1,14 @@
+# ==============================================================================
+# Shiny App: Visulaization & Analysis for Phylogenomic Tree Comparison
+#
+# DESCRIPTION:
+# This Shiny application provides an interactive interface for visualizing and
+# analyzing phylogenetic trees generated from the SAPP pipeline. Users can upload
+# a reference tree, multiple comparison trees, and associated metadata to explore
+# tree similarities, differences, and underlying metrics. 
+# ==============================================================================
+
+
 library(DT)
 library(ape)
 library(dplyr)

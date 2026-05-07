@@ -59,7 +59,7 @@ export PATH="/opt/fasturec/bin:${PATH}"
 
 ### 3. Create conda environment
 ```bash
-conda env create -f envs/environment.yml
+conda env create -f envs/sapp.yaml
 conda activate sapp
 ```
 
@@ -69,7 +69,7 @@ Config contains parameters and methods used in phylogenetics, while samples cont
 
 ### 5. Run & Enjoy
 ```bash
-snakemake --cores 8 --use-conda
+snakemake --cores 8
 ```
 
 You can use **app_visualization.R** to visualize selected tree.
